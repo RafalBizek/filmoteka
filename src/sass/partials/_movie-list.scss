@@ -1,0 +1,274 @@
+@use '../utils/variables' as var;
+@use '../utils/container' as ctr;
+@use '../utils/mediaquery' as mq;
+
+.movie-list {
+  &-section {
+    @extend .container;
+    background-color: var.$background-color-lighter;
+    padding-bottom: 40px;
+    padding-top: 20px;
+    @include mq.tablet {
+      padding: 60px 32px;
+    }
+    @include mq.desktop {
+      padding: 60px 32px;
+    }
+  }
+  &-container {
+    background-color: var.$background-color-lighter;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 480px;
+    @include mq.tablet {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      max-width: 768px;
+    }
+    @include mq.desktop {
+      column-gap: 16px;
+      justify-content: start;
+      max-width: 1280px;
+      row-gap: 32px;
+    }
+  }
+}
+
+.movie-card {
+  background-color: var.$background-color-lighter;
+  border-radius: 5px;
+  position: relative;
+  transition: transform 800ms ease;
+  &:focus,
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.06),
+      1px 4px 6px rgba(0, 0, 0, 0.16);
+  }
+  &:not(:last-child) {
+    margin-bottom: 20px;
+    @include mq.tablet {
+      margin-bottom: 0;
+    }
+  }
+  &__poster {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-bottom: 10px;
+    @include mq.tablet {
+      margin-bottom: 8px;
+      width: 336px;
+      height: 455px;
+    }
+    @include mq.desktop {
+      margin-bottom: 12px;
+      width: 393px;
+      height: 574px;
+    }
+  }
+  &__info {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: var.$background-color-lighter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.33;
+    max-width: 280px;
+    padding-bottom: 5px;
+    @include mq.tablet {
+      max-width: 336px;
+    }
+    @include mq.desktop {
+      font-size: 20px;
+      line-height: 1.2;
+      max-width: 394px;
+    }
+  }
+  &__title {
+    color: var.$text-color-darker;
+    text-transform: uppercase;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  &__genre {
+    color: var.$active-color;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  &__voting {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: var.$background-color-lighter;
+    background: #ff6b01;
+    border-radius: 5px;
+    padding: 3px 10px;
+    margin-left: 5px;
+  }
+}
+
+.movie-card--placeholder {
+  @extend .movie-card;
+  box-sizing: border-box;
+  border: 4px solid var.$active-color;
+  display: flex;
+  align-items: center;
+  background-color: var.$background-color-darker;
+  width: 280px;
+  height: 440px;
+  @include mq.tablet {
+    margin-bottom: 8px;
+    width: 336px;
+    height: 495px;
+  }
+  @include mq.desktop {
+    margin-bottom: 12px;
+    width: 394px;
+    height: 634px;
+  }
+  &__title {
+    color: var.$active-color;
+    font-size: 45px;
+    font-weight: 750;
+    line-height: 1.33;
+    text-align: center;
+  }
+}
+
+.movie-card__trailer {
+  &-button {
+    display: flex;
+    align-items: center;
+    background-color: var.$accent-color-darker;
+    border: none;
+    border-radius: 4px;
+    color: var.$background-color-lighter;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.87;
+    padding: 3px 33px 3px 46px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: background-color 1000ms linear;
+  }
+  &-button:focus,
+  &-button:hover {
+    background-color: var.$accent-color-focus-hover;
+  }
+  &-icon {
+    fill: var.$background-color-lighter;
+    margin-left: 10px;
+  }
+}
+
+.trailer {
+  &-backdrop {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  &-modal {
+    position: relative;
+    border: none;
+    // max-height: 50vw;
+    // max-width: 90vw;
+    transform: translateY(50%) scale(1);
+    @include mq.tablet {
+      // max-height: 45vw;
+      // max-width: 80vw;
+    }
+    @include mq.desktop {
+      // max-height: 28vw;
+      // max-width: 49vw;
+    }
+  }
+  &-movieframe {
+    border: none;
+    height: 384px;
+    width: 690px;
+    max-height: 50vw;
+    max-width: 90vw;
+    @include mq.tablet {
+      height: 576px;
+      width: 1023px;
+      max-height: 45vw;
+      max-width: 80vw;
+    }
+    @include mq.desktop {
+      height: 467px;
+      width: 818px;
+      max-height: 28vw;
+      max-width: 49vw;
+    }
+  }
+
+  &__button-close {
+    position: absolute;
+    top: -34px;
+    right: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__button-close-ico {
+    stroke: black;
+    stroke-width: 2px;
+    background-color: var.$background-color-lighter;
+  }
+
+  &__button-close-ico:is(:focus, :hover) {
+    stroke: var.$active-color;
+  }
+}
+
+.is-hidden,
+.is-hidden .trailer-modal {
+  opacity: 0;
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(0%) scale(0);
+}
+
+.movie-list-change-theme {
+  cursor: pointer;
+  text-align: center;
+  background: 0 0;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  box-shadow: 1px 4px 6px #00000029;
+  padding: 2px 6px;
+}
+
+.icon-day {
+  fill: #fff;
+  background-color: #0000008b;
+}
+
+.icon-night {
+  fill: #1d1c1caa;
+  background-color: #fff;
+}
+
+.dark-mode {
+  color: var.$background-color-lighter !important;
+  background-color: var.$night-setting;
+}

@@ -1,0 +1,14 @@
+/*
+ * Główny plik dla stylów.
+ * Wszystkie partials podłączamy tutaj.
+ */
+
+// Style dla pliku z przykładem HTML fragmentu
+@use './utils/reset';
+@use './utils/global';
+@use './partials/header';
+@use './partials/movie-list';
+@use './partials/movie-info';
+@use './partials/pagination';
+@use './partials/footer';
+@use './partials/to-top-btn.scss'
